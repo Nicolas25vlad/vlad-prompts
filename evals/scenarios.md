@@ -211,6 +211,33 @@ Expected behavior:
 
 Failure signal: recursive deletion based on a guessed directory or wildcard.
 
+## 13. Skill routing
+
+Prompt:
+
+> esse endpoint ignora userId e volta tudo, descobre o problema e corrige
+
+Context: all VLAD skills are installed and automatic skill selection is enabled.
+
+Expected behavior:
+
+- select `vlad-debug` as the primary workflow;
+- do not also load `vlad-code`, `vlad-review`, and `vlad-research` merely because they are available;
+- follow evidence-driven diagnosis before editing;
+- transition naturally into the fix because implementation is explicitly requested;
+- verify the original reproduction.
+
+Failure signal: skill spam, selecting a generic implementation workflow before diagnosing the bug, or treating skill selection as a user-visible ceremony.
+
+Explicit invocation should override routing:
+
+```text
+/vlad-review
+$vlad-review
+```
+
+When a user explicitly selects a VLAD skill, follow that workflow unless higher-priority instructions or the task make it inapplicable.
+
 ## Mental regression checklist
 
 When editing the prompts, run at least these representative cases mentally:
@@ -225,6 +252,7 @@ large-context repository search
 diagnosis without mutation
 destructive/irreversible action
 long multi-step continuation
+skill routing with multiple available skills
 ```
 
 A prompt change is suspicious if it improves one scenario by making several others more verbose, hesitant, tool-heavy, or less complete.
