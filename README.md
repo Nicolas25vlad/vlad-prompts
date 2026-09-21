@@ -1,6 +1,6 @@
 # vlad-prompts
 
-A compact library of behavioral instructions for AI agents.
+A compact library of behavioral instructions and reusable Agent Skills for AI agents.
 
 The main artifact is **[`core/VLAD.md`](core/VLAD.md)**: the canonical, provider-agnostic behavioral system prompt for coding agents, chat assistants, research agents, technical-writing agents, and custom LLM applications.
 
@@ -14,34 +14,35 @@ VLAD optimizes **quality per token**. It removes wasted reasoning, code, tool ca
 
 The **canonical full prompt**.
 
-Use this whenever the host supports a normal system/global instruction budget. It contains the complete behavioral model:
-
-- task classification;
-- input normalization;
-- reasoning discipline;
-- ambiguity and autonomy;
-- minimum sufficient action;
-- planning;
-- tool policy;
-- context and token efficiency;
-- file/repository editing;
-- coding and architecture;
-- debugging;
-- review;
-- error handling;
-- verification;
-- research;
-- explanation and technical communication;
-- long-task state;
-- deterministic behavior;
-- anti-patterns;
-- completion criteria.
+Use this whenever the host supports a normal system/global instruction budget.
 
 ### `core/VLAD.compact.md`
 
 A deliberately reduced build for surfaces with tight instruction limits.
 
 It preserves the highest-value rules, but it is **not the source of truth** and should not constrain the design of the canonical core.
+
+## Skills
+
+The specialized workflows are executable Agent Skills:
+
+- [`vlad-code`](skills/vlad-code/SKILL.md): implementation and repository changes;
+- [`vlad-debug`](skills/vlad-debug/SKILL.md): evidence-driven debugging;
+- [`vlad-review`](skills/vlad-review/SKILL.md): code/PR/diff review;
+- [`vlad-research`](skills/vlad-research/SKILL.md): source-backed research;
+- [`vlad-explain`](skills/vlad-explain/SKILL.md): progressive explanation;
+- [`vlad-help`](skills/vlad-help/SKILL.md): workflow discovery/routing.
+
+The same skill gives a slash-command-style UX on hosts that expose skills through `/`.
+
+Typical invocation:
+
+```text
+Cursor / Claude Code: /vlad-debug
+Codex:               $vlad-debug
+```
+
+See [Skills and slash-style workflows](docs/skills.md).
 
 ## Use it
 
@@ -58,9 +59,22 @@ Host-specific placement notes:
 - [Cursor](agents/cursor.md)
 - [ChatGPT](agents/chatgpt.md)
 
-### 2. Add one specialized module when useful
+### 2. Invoke a task skill
 
-The canonical core already works alone. Specialized modules add depth for repeated workflows:
+Keep the core global, then load one task workflow only when needed.
+
+```text
+VLAD core
++ selected skill
++ project instructions
++ current task/context
+```
+
+Do not activate every skill by default.
+
+### 3. Use the long modules as reference/depth
+
+The skills are the executable interface. The deeper modules remain useful as reference material and for direct prompt composition:
 
 - [Coding](coding/coding.md)
 - [Debugging](coding/debugging.md)
@@ -68,16 +82,26 @@ The canonical core already works alone. Specialized modules add depth for repeat
 - [Research](research/research.md)
 - [Explanation](explanation/explanation.md)
 
-Do **not** concatenate every file into one mega-prompt by default.
-
-### 3. Use the repo as a prompt-design reference
+### 4. Use the repo as a prompt-design reference
 
 - [Principles](docs/principles.md)
 - [Prompt design](docs/prompt-design.md)
 - [Scope coverage](docs/coverage.md)
+- [Skills](docs/skills.md)
 - [Anti-patterns](docs/anti-patterns.md)
 - [Research sources](docs/sources.md)
 - [Behavioral evals](evals/scenarios.md)
+
+## Plugin packaging
+
+The repository ships reusable plugin manifests:
+
+```text
+plugin.json
+.codex-plugin/plugin.json
+```
+
+The portable plugin exposes the `skills/` collection. Host adapters document the preferred installation surface.
 
 ## Architecture
 
@@ -86,6 +110,13 @@ vlad-prompts/
 ├── core/
 │   ├── VLAD.md
 │   └── VLAD.compact.md
+├── skills/
+│   ├── vlad-code/SKILL.md
+│   ├── vlad-debug/SKILL.md
+│   ├── vlad-review/SKILL.md
+│   ├── vlad-research/SKILL.md
+│   ├── vlad-explain/SKILL.md
+│   └── vlad-help/SKILL.md
 ├── coding/
 │   ├── coding.md
 │   ├── debugging.md
@@ -103,13 +134,17 @@ vlad-prompts/
 │   ├── principles.md
 │   ├── prompt-design.md
 │   ├── coverage.md
+│   ├── skills.md
 │   ├── anti-patterns.md
 │   └── sources.md
-└── evals/
-    └── scenarios.md
+├── evals/
+│   └── scenarios.md
+├── plugin.json
+└── .codex-plugin/
+    └── plugin.json
 ```
 
-The architecture is intentionally small. A new file should represent a distinct behavior layer, not one paragraph that could live elsewhere.
+The architecture stays intentionally small. Skills are the executable workflow layer; long modules are reference/depth; adapters contain provider-specific placement.
 
 ## Behavioral model
 
@@ -137,7 +172,7 @@ A strong default is:
 
 ```text
 VLAD full core
-+ one relevant specialized module (optional)
++ one relevant skill (optional)
 + host/project instructions
 + current task
 + dynamic context
@@ -147,6 +182,7 @@ For a constrained surface:
 
 ```text
 VLAD compact
++ selected skill when needed
 + host/project instructions
 + current task
 ```
@@ -155,7 +191,7 @@ Keep stable instructions before volatile context when the host can reuse cached 
 
 ## Evaluation
 
-[`evals/scenarios.md`](evals/scenarios.md) contains provider-agnostic regression scenarios for coding, debugging, research, explanation, ambiguity, long context, scope discipline, and tool efficiency.
+[`evals/scenarios.md`](evals/scenarios.md) contains provider-agnostic regression scenarios.
 
 [`docs/coverage.md`](docs/coverage.md) maps the intended VLAD scope to concrete sections so reductions in prompt size do not silently remove required behavior.
 

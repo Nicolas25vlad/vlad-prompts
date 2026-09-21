@@ -1,0 +1,6 @@
+{
+  "name": "vlad-prompts",
+  "version": "0.3.0",
+  "description": "VLAD behavioral core plus reusable coding, debugging, review, research, and explanation skills.",
+  "skills": "./skills/"
+}

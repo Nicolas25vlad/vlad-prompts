@@ -1,6 +1,6 @@
 # ChatGPT adapter
 
-VLAD has two builds:
+VLAD has two core builds:
 
 - `core/VLAD.md`: canonical full behavior;
 - `core/VLAD.compact.md`: reduced compatibility build.
@@ -13,6 +13,25 @@ Do not shrink the canonical `VLAD.md` merely to satisfy this surface.
 
 Keep project-specific or volatile context in the conversation or project layer instead of consuming the global instruction budget.
 
+## Skills
+
+OpenAI skill-capable surfaces can use the reusable workflows under `skills/`.
+
+Available skills:
+
+```text
+vlad-code
+vlad-debug
+vlad-review
+vlad-research
+vlad-explain
+vlad-help
+```
+
+The repository ships plugin packaging so the specialized workflows can be installed without pasting each prompt repeatedly.
+
+Keep the core as the stable behavioral layer and load the task skill on demand.
+
 ## Larger system/project instruction surfaces
 
 If the ChatGPT/OpenAI surface supports a larger system, developer, workspace, or project instruction layer, prefer the full `core/VLAD.md`.
@@ -23,6 +42,7 @@ A useful order is:
 VLAD full core
 -> stable tool/application rules
 -> stable project context
+-> selected skill
 -> task
 -> dynamic data
 ```
@@ -39,3 +59,4 @@ Official references:
 
 - https://help.openai.com/en/articles/8096356-custom-instructions-for-chatgpt
 - https://developers.openai.com/api/docs/guides/prompt-caching
+- https://developers.openai.com/docs/build-skills

@@ -1,6 +1,6 @@
 # Codex adapter
 
-Use `core/VLAD.md` as the behavioral base. This file only adds Codex-specific placement guidance.
+Use `core/VLAD.md` as the behavioral base.
 
 ## Global use
 
@@ -16,32 +16,40 @@ Keep the global file stable and generic. Put repository-specific facts in reposi
 
 Use a root `AGENTS.md` for project-wide constraints. Add nested `AGENTS.md` files only when a subtree genuinely needs different rules.
 
-Prefer this layering:
+Prefer:
 
 ```text
 global VLAD core
 -> repository instructions
 -> nearest scoped instructions
+-> selected skill
 -> current task
 ```
 
-Do not duplicate the entire core into every nested file.
+## Skills
 
-## Specialized modules
+This repository exposes task workflows under `skills/`.
 
-Load or copy only the module that materially helps the task:
+Explicit Codex invocation:
 
-- `coding/coding.md` for implementation;
-- `coding/debugging.md` for bugs;
-- `coding/review.md` for reviews;
-- `research/research.md` for research;
-- `explanation/explanation.md` for teaching/explanations.
+```text
+$vlad-code
+$vlad-debug
+$vlad-review
+$vlad-research
+$vlad-explain
+$vlad-help
+```
 
-Do not concatenate every module by default.
+Codex can also select a skill automatically when its description matches the request.
+
+For project-local skills, Codex can load skills from `.agents/skills`. The repository also ships `.codex-plugin/plugin.json` for plugin packaging.
+
+Use one task skill by default. Compose several only when the task genuinely spans workflows.
 
 ## Codex behavior
 
-Let Codex's native sandbox, approvals, tools, skills, and system instructions control permissions and tool syntax. VLAD should shape decisions, not fight the harness.
+Let Codex's native sandbox, approvals, tools, skills, and system instructions control permissions and tool syntax. VLAD shapes decisions, not the harness.
 
 Keep stable instructions early in the prompt/context so prompt caching can reuse them when supported.
 
@@ -49,3 +57,4 @@ Official references:
 
 - https://developers.openai.com/docs/agent-configuration/agents-md
 - https://developers.openai.com/docs/customization/overview
+- https://developers.openai.com/docs/build-skills
