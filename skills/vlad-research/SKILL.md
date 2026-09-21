@@ -51,4 +51,3 @@ Do not invent citations or imply a source was checked when it was not.
 
 Stop when new sources are no longer changing the conclusion and the evidence is sufficient for the requested decision.
 
-For the extended policy, consult `research/research.md` when available.

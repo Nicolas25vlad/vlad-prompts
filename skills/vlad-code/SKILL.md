@@ -59,4 +59,3 @@ verification
 remaining limitation only if material
 ```
 
-For the extended policy, consult `coding/coding.md` when it is available and relevant.

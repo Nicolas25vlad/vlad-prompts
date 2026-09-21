@@ -42,4 +42,3 @@ If no substantive defect is found, say so. Do not invent findings to make the re
 
 When relevant, verify tests, CI, review comments, and diff state before declaring the change ready.
 
-For the extended policy, consult `coding/review.md` when available.

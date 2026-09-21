@@ -46,4 +46,3 @@ A good explanation should make it easy to recover:
 
 Do not append a quiz or comprehension check unless the user asked for interactive teaching.
 
-For the extended policy, consult `explanation/explanation.md` when available.

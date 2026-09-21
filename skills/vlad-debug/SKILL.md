@@ -48,4 +48,3 @@ fix, if requested
 verification
 ```
 
-For the extended policy, consult `coding/debugging.md` when available.
