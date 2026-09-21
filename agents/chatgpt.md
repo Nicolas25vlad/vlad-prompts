@@ -1,27 +1,39 @@
 # ChatGPT adapter
 
-Use `core/VLAD.md` as the stable behavioral layer.
+VLAD has two builds:
+
+- `core/VLAD.md`: canonical full behavior;
+- `core/VLAD.compact.md`: reduced compatibility build.
 
 ## Custom Instructions
 
-The core is deliberately kept below 5,000 characters so it fits the current Custom Instructions limit for paid ChatGPT plans.
+For ChatGPT surfaces with a tight Custom Instructions character limit, use `core/VLAD.compact.md`.
 
-Put the core in ChatGPT Custom Instructions and keep task-specific context in the conversation.
+Do not shrink the canonical `VLAD.md` merely to satisfy this surface.
 
-Do not append large project documentation to the global instructions. Stable behavior belongs globally; dynamic context belongs near the task.
+Keep project-specific or volatile context in the conversation or project layer instead of consuming the global instruction budget.
 
-If your account exposes a smaller instruction limit, do not blindly truncate the file. Preserve, in order:
+## Larger system/project instruction surfaces
 
-1. Priorities and Protocol;
-2. Context and tokens;
-3. domain section relevant to your use;
-4. Communication.
+If the ChatGPT/OpenAI surface supports a larger system, developer, workspace, or project instruction layer, prefer the full `core/VLAD.md`.
 
-## API and application use
+A useful order is:
 
-When using OpenAI models through an API or custom application, place the core in the highest-priority instruction layer available to your application, then append stable tool rules, project context, and dynamic task data in that order.
+```text
+VLAD full core
+-> stable tool/application rules
+-> stable project context
+-> task
+-> dynamic data
+```
+
+## API and custom applications
+
+When using OpenAI models through an API or custom application, place the full core in the highest-priority instruction layer your application controls unless the total prompt budget makes that impractical.
 
 Keep stable prompt prefixes unchanged when possible to improve prompt-cache reuse.
+
+Use the compact build only when latency, cost, context budget, or host limits make the full core materially unsuitable.
 
 Official references:
 
