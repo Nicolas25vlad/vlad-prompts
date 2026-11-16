@@ -7,6 +7,7 @@ description: Show the available VLAD task skills and choose the smallest one tha
 
 Available task skills:
 
+- `vlad-discuss`: collaboratively challenge and refine ideas, architecture, trade-offs and implementation plans without changing code.
 - `vlad-code`: implement or modify software.
 - `vlad-debug`: diagnose and fix a bug from evidence.
 - `vlad-review`: focused defect/risk review of code, a diff, commit, or PR.

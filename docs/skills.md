@@ -8,6 +8,7 @@ The core remains global behavior. Skills are task-specific execution modes loade
 
 | Skill | Purpose |
 |---|---|
+| `vlad-discuss` | Collaboratively debate ideas, architecture and implementation plans without coding |
 | `vlad-code` | Implement or modify software |
 | `vlad-debug` | Diagnose and fix bugs from evidence |
 | `vlad-review` | Review defects and risks in code, diffs, commits, or PRs |
@@ -41,7 +42,9 @@ This keeps one source for the workflow instead of a command wrapper and a separa
 Installed skills appear in the `/` menu:
 
 ```text
+/vlad-discuss
 /vlad-code
+/vlad-discuss
 /vlad-debug
 /vlad-review
 /vlad-codebase-audit
@@ -72,6 +75,7 @@ The legacy custom-command mechanism is unnecessary for these workflows because C
 Invoke a skill explicitly with the skill selector syntax:
 
 ```text
+$vlad-discuss
 $vlad-code
 $vlad-debug
 $vlad-review
@@ -137,6 +141,8 @@ Create a new skill when the workflow is repeated and identifiable. Do not create
 ## Auto-selection vs explicit invocation
 
 Descriptions should be strong enough for an agent to select the skill automatically when appropriate.
+
+Choose `vlad-discuss` for collaborative brainstorming, architecture debate, trade-offs or planning **before implementation**. It is conversational and read-only by default; use `vlad-code` when the user clearly asks to implement. Do not force an ADR or a large specification on casual discussion.
 
 Choose `vlad-review` for focused defect review, `vlad-codebase-audit` for a repository health/debt inventory, and `vlad-pr-audit` for a scored pre-review of only the proposed diff. Both audit skills are read-only unless the user separately authorizes changes. Their scores are evidence-based estimates, not guarantees.
 
