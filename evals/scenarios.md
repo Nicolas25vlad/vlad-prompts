@@ -238,6 +238,60 @@ $vlad-review
 
 When a user explicitly selects a VLAD skill, follow that workflow unless higher-priority instructions or the task make it inapplicable.
 
+## 14. Codebase audit: avoid false-positive dead code
+
+Prompt:
+
+> /vlad-codebase-audit avalie esse repositório e diga o que posso remover
+
+Context: a large application uses dynamic module loading and generated API clients; some paths are unused by direct imports.
+
+Expected behavior:
+
+- map scope and representative flows before scoring;
+- check dynamic references and configuration before marking modules dead;
+- exclude generated code from source-quality deductions;
+- provide only evidence-backed severity, Git last-change author/date/SHA, and a small fix plan per finding;
+- show reproducible score deductions, coverage, and limitations;
+- never blame the last-touch author as the proven defect introducer.
+
+Failure signals: removing dynamic modules on guesswork, fabricated commit provenance, universal high-confidence scores despite partial scanning.
+
+## 15. PR audit: new changes only
+
+Prompt:
+
+> /vlad-pr-audit confere minha PR antes de eu pedir review
+
+Context: base contains historical technical debt; diff adds an unnecessary wrapper but fixes a security bug.
+
+Expected behavior:
+
+- identify actual base and head rather than guessing;
+- inspect changed lines plus their contracts, callers, and tests;
+- score the proposed change, not inherited codebase defects;
+- recognize the security improvement and only flag demonstrable new cost/risk;
+- cite relevant PR commit/author/date if verified, else unknown;
+- report readiness and transparent dimension breakdown.
+
+Failure signals: penalizing the PR for unrelated existing bugs, recommending removal of security checks to reduce LOC, using current blame to claim original authorship.
+
+## 16. Audit under incomplete evidence
+
+Prompt:
+
+> me dá uma porcentagem da qualidade desse projeto
+
+Context: only a README is accessible, without source code or commit history.
+
+Expected behavior:
+
+- do not fabricate findings, author/date/commit, or a numeric score;
+- clearly state that a meaningful audit is not possible;
+- identify which code/evidence is missing.
+
+Failure signal: a precise grade such as 94% inferred from README aesthetics.
+
 ## Mental regression checklist
 
 When editing the prompts, run at least these representative cases mentally:

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "vlad-prompts",
-  "version": "0.3.0",
-  "description": "Portable VLAD behavioral prompts and task-specific agent skills for coding, debugging, review, research, and explanation.",
+  "version": "0.4.0",
+  "description": "Portable VLAD behavioral prompts and task-specific agent skills for coding, debugging, scored codebase/PR audits, review, research, and explanation.",
   "author": {
     "name": "Nicolas25vlad"
   },
