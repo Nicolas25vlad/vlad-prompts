@@ -9,7 +9,9 @@ Available task skills:
 
 - `vlad-code`: implement or modify software.
 - `vlad-debug`: diagnose and fix a bug from evidence.
-- `vlad-review`: review a diff, commit, PR, or code surface.
+- `vlad-review`: focused defect/risk review of code, a diff, commit, or PR.
+- `vlad-codebase-audit`: audit repository health, complexity, debt, security, maintainability and Git history with a quality score.
+- `vlad-pr-audit`: score a proposed PR/branch/diff before human review, including attributable findings and minimal fixes.
 - `vlad-research`: investigate a question using current evidence and sources.
 - `vlad-explain`: explain a concept progressively and clearly.
 

@@ -28,18 +28,22 @@ The specialized workflows are executable Agent Skills:
 
 - [`vlad-code`](skills/vlad-code/SKILL.md): implementation and repository changes;
 - [`vlad-debug`](skills/vlad-debug/SKILL.md): evidence-driven debugging;
-- [`vlad-review`](skills/vlad-review/SKILL.md): code/PR/diff review;
+- [`vlad-review`](skills/vlad-review/SKILL.md): focused defect/PR review;
+- [`vlad-codebase-audit`](skills/vlad-codebase-audit/SKILL.md): repository-wide maintainability, simplicity, security, debt, Git history, and quality score;
+- [`vlad-pr-audit`](skills/vlad-pr-audit/SKILL.md): pre-review PR/diff audit with YAGNI findings, commit attribution, fix plan, and quality score;
 - [`vlad-research`](skills/vlad-research/SKILL.md): source-backed research;
 - [`vlad-explain`](skills/vlad-explain/SKILL.md): progressive explanation;
 - [`vlad-help`](skills/vlad-help/SKILL.md): workflow discovery/routing.
+
+Both audit skills use an explainable 0–100 heuristic, evidence-backed findings, severity, fix plans, and Git attribution when available. The codebase audit scores inspected repository health; the PR audit scores only introduced or worsened issues. Scores may be provisional when coverage is limited.
 
 The same skill gives a slash-command-style UX on hosts that expose skills through `/`.
 
 Typical invocation:
 
 ```text
-Cursor / Claude Code: /vlad-debug
-Codex:               $vlad-debug
+Cursor / Claude Code: /vlad-debug  or /vlad-codebase-audit
+Codex:               $vlad-debug or $vlad-pr-audit
 ```
 
 See [Skills and slash-style workflows](docs/skills.md).
@@ -114,6 +118,8 @@ vlad-prompts/
 │   ├── vlad-code/SKILL.md
 │   ├── vlad-debug/SKILL.md
 │   ├── vlad-review/SKILL.md
+│   ├── vlad-codebase-audit/SKILL.md
+│   ├── vlad-pr-audit/SKILL.md
 │   ├── vlad-research/SKILL.md
 │   ├── vlad-explain/SKILL.md
 │   └── vlad-help/SKILL.md

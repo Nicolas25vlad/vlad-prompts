@@ -10,7 +10,9 @@ The core remains global behavior. Skills are task-specific execution modes loade
 |---|---|
 | `vlad-code` | Implement or modify software |
 | `vlad-debug` | Diagnose and fix bugs from evidence |
-| `vlad-review` | Review code, diffs, commits, or PRs |
+| `vlad-review` | Review defects and risks in code, diffs, commits, or PRs |
+| `vlad-codebase-audit` | Audit codebase debt, YAGNI, maintenance/security risks, Git provenance and score |
+| `vlad-pr-audit` | Pre-review a PR/branch/diff for needless complexity, regressions, evidence and score |
 | `vlad-research` | Run source-backed technical/factual research |
 | `vlad-explain` | Explain a concept with progressive clarity |
 | `vlad-help` | Show the available workflows and route to one |
@@ -42,6 +44,8 @@ Installed skills appear in the `/` menu:
 /vlad-code
 /vlad-debug
 /vlad-review
+/vlad-codebase-audit
+/vlad-pr-audit
 /vlad-research
 /vlad-explain
 /vlad-help
@@ -56,6 +60,8 @@ Place/install the skill directories under Claude Code's skills mechanism. The di
 ```text
 /vlad-debug
 /vlad-review
+/vlad-codebase-audit
+/vlad-pr-audit
 /vlad-research
 ```
 
@@ -69,6 +75,8 @@ Invoke a skill explicitly with the skill selector syntax:
 $vlad-code
 $vlad-debug
 $vlad-review
+$vlad-codebase-audit
+$vlad-pr-audit
 $vlad-research
 $vlad-explain
 ```
@@ -129,6 +137,8 @@ Create a new skill when the workflow is repeated and identifiable. Do not create
 ## Auto-selection vs explicit invocation
 
 Descriptions should be strong enough for an agent to select the skill automatically when appropriate.
+
+Choose `vlad-review` for focused defect review, `vlad-codebase-audit` for a repository health/debt inventory, and `vlad-pr-audit` for a scored pre-review of only the proposed diff. Both audit skills are read-only unless the user separately authorizes changes. Their scores are evidence-based estimates, not guarantees.
 
 Explicit invocation remains useful when the user wants to force a workflow:
 
