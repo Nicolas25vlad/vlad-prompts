@@ -26,6 +26,7 @@ It preserves the highest-value rules, but it is **not the source of truth** and 
 
 The specialized workflows are executable Agent Skills:
 
+- [`vlad-discuss`](skills/vlad-discuss/SKILL.md): collaborative idea, architecture, and implementation-plan discussions without premature code changes;
 - [`vlad-code`](skills/vlad-code/SKILL.md): implementation and repository changes;
 - [`vlad-debug`](skills/vlad-debug/SKILL.md): evidence-driven debugging;
 - [`vlad-review`](skills/vlad-review/SKILL.md): focused defect/PR review;
@@ -37,13 +38,15 @@ The specialized workflows are executable Agent Skills:
 
 Both audit skills use an explainable 0–100 heuristic, evidence-backed findings, severity, fix plans, and Git attribution when available. The codebase audit scores inspected repository health; the PR audit scores only introduced or worsened issues. Scores may be provisional when coverage is limited.
 
+Use `vlad-discuss` to challenge assumptions, compare design options, and agree on a minimal plan **before** switching to `vlad-code` for implementation. Discussion never authorizes code changes by itself.
+
 The same skill gives a slash-command-style UX on hosts that expose skills through `/`.
 
 Typical invocation:
 
 ```text
-Cursor / Claude Code: /vlad-debug  or /vlad-codebase-audit
-Codex:               $vlad-debug or $vlad-pr-audit
+Cursor / Claude Code: /vlad-discuss or /vlad-debug
+Codex:               $vlad-discuss or $vlad-pr-audit
 ```
 
 See [Skills and slash-style workflows](docs/skills.md).
@@ -115,6 +118,7 @@ vlad-prompts/
 │   ├── VLAD.md
 │   └── VLAD.compact.md
 ├── skills/
+│   ├── vlad-discuss/SKILL.md
 │   ├── vlad-code/SKILL.md
 │   ├── vlad-debug/SKILL.md
 │   ├── vlad-review/SKILL.md
