@@ -28,6 +28,7 @@ The specialized workflows are executable Agent Skills:
 
 - [`vlad-discuss`](skills/vlad-discuss/SKILL.md): collaborative idea, architecture, and implementation-plan discussions without premature code changes;
 - [`vlad-code`](skills/vlad-code/SKILL.md): implementation and repository changes;
+- [`vlad-doomscroll`](skills/vlad-doomscroll/SKILL.md): low-interruption autonomous execution while the user is away;
 - [`vlad-debug`](skills/vlad-debug/SKILL.md): evidence-driven debugging;
 - [`vlad-review`](skills/vlad-review/SKILL.md): focused defect/PR review;
 - [`vlad-codebase-audit`](skills/vlad-codebase-audit/SKILL.md): repository-wide maintainability, simplicity, security, debt, Git history, and quality score;

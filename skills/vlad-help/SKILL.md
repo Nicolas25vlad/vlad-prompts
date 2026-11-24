@@ -9,6 +9,7 @@ Available task skills:
 
 - `vlad-discuss`: collaboratively challenge and refine ideas, architecture, trade-offs and implementation plans without changing code.
 - `vlad-code`: implement or modify software.
+- `vlad-doomscroll`: stay focused on an authorized coding task without unnecessary questions or premature stopping; interrupt only for material blockers.
 - `vlad-debug`: diagnose and fix a bug from evidence.
 - `vlad-review`: focused defect/risk review of code, a diff, commit, or PR.
 - `vlad-codebase-audit`: audit repository health, complexity, debt, security, maintainability and Git history with a quality score.
