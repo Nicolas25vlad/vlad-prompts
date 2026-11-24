@@ -10,6 +10,7 @@ The core remains global behavior. Skills are task-specific execution modes loade
 |---|---|
 | `vlad-discuss` | Collaboratively debate ideas, architecture and implementation plans without coding |
 | `vlad-code` | Implement or modify software |
+| `vlad-doomscroll` | Work autonomously on authorized code tasks with minimal interruptions |
 | `vlad-debug` | Diagnose and fix bugs from evidence |
 | `vlad-review` | Review defects and risks in code, diffs, commits, or PRs |
 | `vlad-codebase-audit` | Audit codebase debt, YAGNI, maintenance/security risks, Git provenance and score |
@@ -44,6 +45,7 @@ Installed skills appear in the `/` menu:
 ```text
 /vlad-discuss
 /vlad-code
+/vlad-doomscroll
 /vlad-discuss
 /vlad-debug
 /vlad-review
@@ -77,6 +79,7 @@ Invoke a skill explicitly with the skill selector syntax:
 ```text
 $vlad-discuss
 $vlad-code
+$vlad-doomscroll
 $vlad-debug
 $vlad-review
 $vlad-codebase-audit
